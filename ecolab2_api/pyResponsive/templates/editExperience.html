@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/static/style.css">
+    <title>Modifier l'experience</title>
+</head>
+<body>
+    <div class="addExperience">
+      <form action="{{ url_for('processToEditExperiences') }}" method="post">
+        <div class="form-group">
+          <label >Nom</label>
+          <input type="text" name="nom" class="form-control" value="{{ experience.nom }}">
+        </div>
+        <br>
+        <div class="form-group">
+          <label >Date de Debut</label>
+          <input type="date" name="date_debut" class="form-control" value="{{ experience.date_debut }}">
+        </div>
+        <br>
+        <div class="form-group">
+          <label >Date de Fin</label>
+          <input type="date" name="date_fin" class="form-control" value="{{ experience.date_fin }}">
+        </div>
+        <br>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Etat</label>
+          <select class="form-control" id="exampleFormControlSelect1" value="{{ experience.etat_experience }}" name="etat_experience">
+            <option value="à venir" >à venir</option>
+            <option value="En cours"  >En cours</option>
+            <option value="Terminés" >Terminés</option>
+          </select>
+        </div>
+        <input type="hidden" name="id_experience" value="{{ experience.id }}">
+        <br>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+</body>
+</html>

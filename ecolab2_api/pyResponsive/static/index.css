@@ -1,0 +1,309 @@
+/* Navbar */
+
+nav{
+    background-color: white;
+    margin-bottom: 50px;
+    padding-bottom: 20px;
+    justify-content: space-between;
+    display: flex;
+    flex-direction: row;
+    transition: white 0.3s;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+nav.fixed {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #3498db;
+}
+ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+li{
+    float: left;
+}
+li a{
+    display: block;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+nav a{
+    text-decoration: none;
+}
+nav #acc{
+    font-size: 20px;
+}
+li a:hover{
+    background-color: #0851be;
+}
+nav a{
+    color: #fff;
+    background-color: #0d6efd;
+    padding: 6px 12px;
+    margin: 30px;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+    border-color: #0d6efd;
+}
+nav a .acc{
+    text-align:center;
+}
+nav a:active{
+    border: 5px solid #3e85f0;
+}
+/* Vers le haut */
+#haut {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    /* Autres styles que vous souhaitez ajouter */
+  }
+  
+/* Show it is fixed to the top */
+
+
+                                                                    /* COMMMUN */
+/* Zone des ecolabs */
+.lesEcolabs{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 50px 0px;
+    align-items: center;
+    min-height: 100;
+    font-family:'Lemon Milk medium', sans-serif;
+   
+    padding-left: 8%;
+    
+}
+.lesEcolabs > div{
+    text-align: center;
+}
+@media screen and (max-width: 1400px){
+    .lesEcolabs{
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        gap: 60px;
+        /* list-style: none; */
+    }
+
+    @media screen and (max-width: 920px){
+        .lesEcolabs{
+            display: grid;
+            grid-template-columns: repeat(1,1fr);
+            gap: 60px;
+            /* list-style: none; */
+        }
+        
+    }
+}
+
+                                                    /* Zone d'un ecolab et ce qu'il y a autour */
+.ecolabZone{
+    border: 2px rgb(218, 215, 215) solid;
+    height: 700px;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    padding: 7px;
+}
+/* Zone cellules */
+.ecolab{
+    width: 100%;
+    height: 450px;
+    background-color: lightblue;
+}
+/* Partie haute de l'ecolab */
+.haut, .bas{
+    display: flex;
+    flex-direction: row;
+}
+/* Cellules */
+.cell{
+    margin: 10px;
+    width: 180px;
+    height: 180px;
+    margin-top:15px;
+}
+/* Boutons cellules */
+.btn{
+    background-color: rgb(22, 216, 174);
+    border: 0px solid;
+    border-radius: 5px 5px 5px 5px;
+}
+.redBtn{
+    background-color: red;
+    border: 0px solid;
+    border-radius: 5px 5px 5px 5px;
+}
+.cell .redBtn:hover{
+    font-size:15px;
+    background-color: red;
+}
+.cell:hover{
+    width: 181px;
+    height: 181px;
+}
+.cell .btn:hover{
+    font-size:15px;
+    background-color: rgb(11, 177, 141);
+}
+/* Nom de l'ecolab */
+h2{
+    width: 100px;
+    background-color: rgb(8, 123, 168);
+    padding: 10px;
+    border: 2px;
+    border-radius: 5px 5px 5px 5px;
+}
+/* Case bleu au dessus */
+.ligne1 p{
+    width: 150px;
+    height: 70px;
+    background-color: rgb(0, 106, 168);
+    margin-left: 60%;
+}
+/* 2 cases rouge au dessus */
+.ligne2{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+#r1,#r2,#r3 {
+    width: 100px;
+    height: 50px;
+    background-color: rgb(211, 70, 70);
+}
+/* Nom et case rouge en dessous */
+.ligne3{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.ligne1, .ligne2, .ligne3{
+    align-items: center;
+}
+
+
+                                                                            /* ECOCUBE */
+
+.ecocube{
+    border: 2px rgb(218, 215, 215) solid;
+    height: 700px;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    padding: 7px;
+    align-items: center;
+    justify-content: space-around;
+}
+.cellEcocube{
+    margin-top: 30px;
+    margin: 10px;
+}
+.btn .cellEcocube{
+    width: 500px;
+}
+.namEcocube{
+    width: 120px;
+    background-color: rgb(8, 123, 168);
+    padding: 10px;
+}
+.cellEcocube .btn:hover{
+    margin: 10px;
+    width: 220px;
+    height: 200px;
+    font-size: 15px;
+    background-color: rgb(11, 177, 141);
+
+}
+
+
+                                                    /* Cellules du bas ECOLAB 4 ET ECOLAB 2 */
+#E4C1, #E2C1{
+    padding-left: 50%;
+}
+
+
+
+/* Footer */
+
+
+
+.footer {
+    background-color: #3498db;
+    color: #fff;
+    padding: 20px;
+    margin-top: 50px;
+}
+
+/* Style pour la section de contenu */
+.footer__content {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+/* Liens */
+.footer__child {
+    margin: 10px;
+}
+.link-font {
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Titres */
+.footer__title {
+    color: #fff;
+}
+
+/* Liste de liens */
+.text-black li {
+    list-style: none;
+    padding: 5px;
+}
+
+/* Liens sociaux */
+.footer__social a {
+    color: #fff; /* Blanc */
+    text-decoration: none;
+}
+
+/* Crédits */
+.credits {
+    list-style: none;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    background-color: #2980b9; 
+    margin-top: 20px;
+}
+.credits li {
+    margin: 0 10px;
+}
+.credits a {
+    color: #fff; /* Blanc */
+    text-decoration: none;
+}
+footer li a{
+    color: white;
+}
+footer li a:hover{
+    background-color:#3498db;
+    text-decoration: underline;
+}
+.logoCNRS{
+    width: 220px;
+    height: 220px;
+}
+
+

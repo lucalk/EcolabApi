@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/static/style.css">
+    <title>Experiences</title>
+</head>
+<body>
+    <div class="retour">
+        <form action="/">
+            <button type="submit" class="btn btn-primary">Retour</button>
+        </form>
+    </div>
+
+    <table>
+        <div class="historique">
+            <table class="table">
+                <h2 class="titre-historique">Les Experiences</h2> 
+                <form action="{{ url_for('addExperience') }}">
+                    <button type="submit" class="btn btn-primary">Ajouter</button>    
+                </form>    
+                <tr>
+                    <th>Id</th>
+                    <th>Nom</th>
+                    <th>Date de Debut</th>
+                    <th>Date de Fin</th>
+                    <th>Etat de l'experience</th>
+                    <th>Action</th>
+                
+                {% for object in experiences %}  
+                <tr>
+                    <th>{{ object.id }} </th>
+                    <th>{{ object.nom }}</th>
+                    <th>{{ object.date_debut }}</th>
+                    <th>{{ object.date_fin }}</th>
+                    <th>{{ object.etat_experience }}</th>
+                    <th>
+                    <form action="{{ url_for('editExperiences') }}" method="post">
+                        <button type="submit" class="btn btn-primary">modifier</button>
+                        <input type="hidden" name="id_experience" value="{{ object.id }}">
+                    </form>
+                    </th>
+                </tr>
+                {% endfor %}
+            </table>
+          </div>
+    </table>
+</body>
+</html>

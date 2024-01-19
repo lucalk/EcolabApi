@@ -1,0 +1,59 @@
+.body{
+    background-color: black;
+}
+
+.formExp{
+    width: 70%;
+    margin-left: 15%;
+    margin-top: 4%;
+}
+
+.table{
+    width: 70%;
+   
+    text-align: center;
+    margin-left: 15%;
+    margin-top: 5%;
+    
+}
+.titre-historique{
+    text-align: center;   
+    margin-top: 2%;
+}
+
+.param{
+    width: 50%;
+    margin-left: 24%;
+    margin-right: 90%;
+    border: 1px solid black; /* Vous pouvez ajuster l'épaisseur et la couleur de la bordure */
+    box-sizing: border-box;
+}
+.messageSucces{
+    background-color: rgb(108, 193, 243);
+    width: 50%;
+    margin-left: 25%;
+    text-align: center;
+    margin-top: 5%;
+    padding: 2%;
+    border: 1px solid black; /* Vous pouvez ajuster l'épaisseur et la couleur de la bordure */
+    box-sizing: border-box; 
+    
+
+}
+.retour{
+    margin-top: 2%;
+    width: 70%;
+    margin-left: 15%;
+}
+.addExperience{
+    
+    width:70% ;
+    margin-left: 15%;
+    border: 1px solid black; /* Vous pouvez ajuster l'épaisseur et la couleur de la bordure */
+    box-sizing: border-box; 
+    padding-right: 5%;
+    padding-left :5%;    
+    padding-top: 2%;
+    padding-bottom: 2%;
+    background-color: rgb(71, 175, 175) ;
+}
