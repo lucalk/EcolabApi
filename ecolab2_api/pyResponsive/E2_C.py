@@ -166,7 +166,7 @@ def traitement():
             ecolab4 = "http://10.119.40.100:8080/"
             json_data4 = requests.get(ecolab4).json()
 
-            return render_template('adminTemplate.html', role= role, info2=json_data2, info4=json_data4)
+            return render_template('adminTemplate.html', role=role, info2=json_data2, info4=json_data4)
         except Exception as e:
             print(f"Une erreur s'est produite : {e}")
         return "Erreur lors de la récupération des données depuis l'API."
