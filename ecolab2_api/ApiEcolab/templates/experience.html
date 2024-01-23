@@ -10,10 +10,10 @@
 </head>
 <body>
     <div class="retour">
-        <form action="/">
-            <button type="submit" class="btn btn-primary">Retour</button>
-        </form>
-    </div>
+        <form action="{{url_for('retour')}}" method="POST">
+          <button type="submit" class="btn btn-primary">Retour</button>
+        </form>  
+      </div>
 
     <table>
         <div class="historique">

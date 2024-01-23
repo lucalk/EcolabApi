@@ -153,29 +153,52 @@ def traitement():
     login = request.form.get('login')
     mdp = request.form.get('password')
 
-    role = octopus.get_role_by_user(login, mdp)
 
-    # Admin template
-    if role == 'admin':
-        try:
-            # Retrieving data in Json Ecolab 2
-            ecolab2 = "http://10.119.20.100:8080/"
-            json_data2 = requests.get(ecolab2).json()
+    authentification = octopus.user_exists(login,mdp)
 
-            # Retrieving data in Json Ecolab 4
-            ecolab4 = "http://10.119.40.100:8080/"
-            json_data4 = requests.get(ecolab4).json()
+    if authentification == True:
+        role = octopus.get_role_by_user(login)
 
-            return render_template('adminTemplate.html', role=role, info2=json_data2, info4=json_data4)
-        except Exception as e:
-            print(f"Une erreur s'est produite : {e}")
-        return "Erreur lors de la récupération des données depuis l'API."
-    
+         # Admin template
+        if role == 'admin':
+            try:
+                # Retrieving data in Json Ecolab 2
+                ecolab2 = "http://10.119.20.100:8080/"
+                json_data2 = requests.get(ecolab2).json()
 
-    elif role == 'normal':
-        return redirect(url_for('index'))
+                # Retrieving data in Json Ecolab 4
+                ecolab4 = "http://10.119.40.100:8080/"
+                json_data4 = requests.get(ecolab4).json()
+
+                return render_template('adminTemplate.html', role=role, info2=json_data2, info4=json_data4)
+            except Exception as e:
+                print(f"Une erreur s'est produite : {e}")
+            return "Erreur lors de la récupération des données depuis l'API."
+        
+        elif role == 'normal':
+            return redirect(url_for('index'))
+        else:
+            return redirect(url_for('index'))
     else:
-        return redirect(url_for('index'))
+        return render_template('connection.html', authentification=authentification)
+    
+# Return admin template
+@app.route('/', methods=['POST'])
+def retour():
+    global role
+    try:
+        # Retrieving data in Json Ecolab 2
+        ecolab2 = "http://10.119.20.100:8080/"
+        json_data2 = requests.get(ecolab2).json()
+
+        # Retrieving data in Json Ecolab 4
+        ecolab4 = "http://10.119.40.100:8080/"
+        json_data4 = requests.get(ecolab4).json()
+       
+        return render_template('adminTemplate.html', role=role, info2=json_data2, info4=json_data4)
+    except Exception as e:
+        print(f"Une erreur s'est produite : {e}")
+        return "Erreur lors de la récupération des données depuis l'API."
 
 # Add experience passed
 @app.route('/new-experience-in-cellule', methods=['POST'])

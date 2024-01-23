@@ -1,0 +1,187 @@
+= Compte Rendu E5
+:toc:
+== Sommaire
+
+KIUSI Luca
+
+
+== Arborescence
+----
+    ├── ApiEcolab
+    │   ├── Cellule.py ( Classe Cellule )
+    │   ├── config.json
+    │   ├── Connexion.py ( Paramètre de connexion )
+    │   ├── E2_C.py ( Toutes les routes concernant les templates)
+    │   ├── Ecolab.py( Classe Ecolab )
+    │   ├── Experience.py ( Classe Experience )
+    │   ├── Historique.py ( Classe Historique )
+    │   ├── OctopusDB.py ( Classe OctopusDB contenant toutes les fonctions )
+    │   ├── __pycache__
+    │   │   ├── Cellule.cpython-310.pyc
+    │   │   ├── Connexion.cpython-310.pyc
+    │   │   ├── Ecolab.cpython-310.pyc
+    │   │   ├── Experience.cpython-310.pyc
+    │   │   ├── Historique.cpython-310.pyc
+    │   │   ├── OctopusDB.cpython-310.pyc
+    │   │   └── User.cpython-310.pyc
+    │   ├── static
+    │   │   ├── images
+    │   │   │   ├── Ecolabs.png
+    │   │   │   ├── icons8-flèche-vers-le-haut-100.png
+    │   │   │   ├── icons8-flèche-vers-le-haut-50.png
+    │   │   │   ├── logo-footer.svg
+    │   │   │   └── logo.svg
+    │   │   ├── index.css
+    │   │   └── style.css
+    │   ├── templates
+    │   │   ├── addExperience.html
+    │   │   ├── adminTemplate.html
+    │   │   ├── connection.html
+    │   │   ├── detail.html
+    │   │   ├── editExperience.html
+    │   │   ├── experience.html
+    │   │   ├── index.html
+    │   │   ├── successAddExperienceInCellule.html
+    │   │   └── successAddNewExperience.html
+    │   └── User.py ( Classe Utilisateur )
+    └── Doc.adoc
+----
+
+== A : Classe Utilisateur
+Source : User.py
+
+Modules utilisés :
+----
+    Flask  SQLALchemy : pip install Flask-SQLAlchemy
+    SQLALchemy : pip install SQLAlchemy
+    pip install Flask-Bcrypt
+----
+
+
+Import :
+----
+    from flask_sqlalchemy import SQLAlchemy
+    from sqlalchemy import Column, Integer,String,DATE, ForeignKey
+    from sqlalchemy.orm import relationship
+    from flask import Flask
+    from Connexion import Base, DB_URL, session,Session
+    from flask_bcrypt import Bcrypt,generate_password_hash,check_password_hash
+----
+
+Création d'un fichier User.py pour les utilisateurs
+
+
+Structure de la table user
+----
+    __tablename__ = 'utilisateur'
+
+    id = Column(Integer, primary_key=True)
+    username = Column(String(50),nullable=False)
+    userpassword = Column(String(255), nullable=False)
+    role = Column(String(20), nullable=False, default='visiteur')
+----
+
+Méthode de la classe
+
+- Hacher le mot de passe
+
+- Comparer le mot de passe hacher avec un autre mot de passe
+----
+        bcrypt = Bcrypt()
+
+    # Hash the created password
+    def set_password(self, password):
+        self.userpassword = self.bcrypt.generate_password_hash(password).decode('utf-8')
+
+    # Compare hash password with raw password
+    def check_password(self, password):
+        return self.bcrypt.check_password_hash(self.userpassword, password)
+----
+
+Base de donnée cible :
+----
+    Base.metadata.create_all(DB_URL)
+----
+
+Création d'un nouvel utilisateur :
+
+----
+    # Create user
+    # adminuser = Utilisateur(username='',role='')
+    # adminuser.set_password('')
+
+    # add user
+    # session.add(adminuser)
+    # session.commit()
+----
+
+
+== B : Fonction
+Fonction permettant de voir si un utilisateur existe :
+----
+     def user_exists(cls,login,password):
+        global session
+        users = session.query(Utilisateur).all()
+        try:
+            for user in users:
+                if login == user.username:
+                    if user.check_password(password):
+                        return True
+                    else:
+                        return 'mot de passe incorrecte'
+            return 'Utilisateur inexistant'
+        except Exception as e:
+            return f"une erreur s'est produite : {str(e)}"
+----
+
+Fonction permettant de récuperer le role d'un utilisateur :
+----
+    def get_role_by_user(cls,username):
+        global session
+        users = session.query(Utilisateur).all()
+        try:
+            for user in users:
+                if username == user.username:
+                        return user.role
+
+            return 'utilisateur inexistant'
+        except Exception as e:
+            return f"une erreur s'est produite : {str(e)}"
+----
+
+Route de connexion :
+----
+    @app.route('/traitement', methods=['POST'])
+def traitement():
+    global role
+
+    login = request.form.get('login')
+    mdp = request.form.get('password')
+    authentification = octopus.user_exists(login,mdp)
+
+    if authentification == True:
+        role = octopus.get_role_by_user(login)
+         # Admin template
+        if role == 'admin':
+            try:
+                # Retrieving data in Json Ecolab 2
+                ecolab2 = "http://10.119.20.100:8080/"
+                json_data2 = requests.get(ecolab2).json()
+
+                # Retrieving data in Json Ecolab 4
+                ecolab4 = "http://10.119.40.100:8080/"
+                json_data4 = requests.get(ecolab4).json()
+
+                return render_template('adminTemplate.html', role=role, info2=json_data2, info4=json_data4)
+            except Exception as e:
+                print(f"Une erreur s'est produite : {e}")
+            return "Erreur lors de la récupération des données depuis l'API."
+        elif role == 'normal':
+            return redirect(url_for('index'))
+        else:
+            return redirect(url_for('index'))
+    else:
+        return print(authentification)
+----
+
+

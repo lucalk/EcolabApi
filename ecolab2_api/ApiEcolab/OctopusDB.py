@@ -3,7 +3,6 @@ Flask : pip install SQLAlchemy
 
 '''
 
-
 ############################################################################################################
 
 # Importation des modules nécessaires
@@ -140,18 +139,33 @@ class OctopusDB:
             return f"Une erreur s'est produite : {str(e)}"
         
     # Auteur Luca
+    
+    # Existant
+    def user_exists(cls,login,password):
+        global session
+        users = session.query(Utilisateur).all()
+        try:
+            for user in users:
+                if login == user.username:
+                    if user.check_password(password):
+                        return True
+                    else:
+                        return 'mot de passe incorrecte'
+                    
+            return 'Utilisateur inexistant'
+
+        except Exception as e:
+            return f"une erreur s'est produite : {str(e)}"
         
+
     # method to find out if user exists and get their role
-    def get_role_by_user(cls,username,password):
+    def get_role_by_user(cls,username):
         global session
         users = session.query(Utilisateur).all()
         try:
             for user in users:
                 if username == user.username:
-                    if user.check_password(password):
                         return user.role
-                    else:
-                        return 'mot de passe incorrecte'
             
             return 'utilisateur inexistant'
         except Exception as e:
@@ -159,4 +173,19 @@ class OctopusDB:
             
 
 
+# name = 'admin'
+# pwd = 'UtilisateurAdmin'
+
+
+
+# Affichage du résultat
+
+
 octopus = OctopusDB()
+# resultat = octopus.user_existant(name, pwd)
+
+# print(resultat)
+
+
+
+

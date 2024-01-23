@@ -1,7 +1,7 @@
 '''
+
 Flask  SQLALchemy : pip install Flask-SQLAlchemy
 SQLALchemy : pip install SQLAlchemy
-
 pip install Flask-Bcrypt
 
 '''
@@ -12,11 +12,6 @@ from sqlalchemy import Column, Integer,String,DATE, ForeignKey
 from sqlalchemy.orm import relationship
 from flask import Flask
 from Connexion import Base, DB_URL, session,Session
-
-from sqlalchemy.orm import sessionmaker
-from flask_login import UserMixin
-
-
 from flask_bcrypt import Bcrypt,generate_password_hash,check_password_hash
 
 
@@ -50,6 +45,8 @@ Base.metadata.create_all(DB_URL)
 # Create user
 # adminuser = Utilisateur(username='',role='')
 # adminuser.set_password('')
+
+# UtilisateurAdmin
 
 # add user
 # session.add(adminuser)
